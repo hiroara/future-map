@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "future-map"
+version = "0.1.0"
+description = "Simple package to enhance Python's concurrent.futures for memory efficiency"
+authors = ["Arai Hiroki <hiroara62@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/hiroara/future-map"
+repository = "git@github.com:hiroara/future-map.git"
+keywords = ["concurrency", "thread-pool", "process-pool", "future", "executor"]
+packages = [
+  { include = "future_map", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tox = "^3.24.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+black = "^21.9b0"
+pylint = "^2.11.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
