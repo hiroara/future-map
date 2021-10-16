@@ -6,7 +6,7 @@ authors = ["Arai Hiroki <hiroara62@gmail.com>"]
 readme = "README.md"
 license = "MIT"
 homepage = "https://github.com/hiroara/future-map"
-repository = "git@github.com:hiroara/future-map.git"
+repository = "https://github.com/hiroara/future-map.git"
 keywords = ["concurrency", "thread-pool", "process-pool", "future", "executor"]
 packages = [
   { include = "future_map", from = "src" },
