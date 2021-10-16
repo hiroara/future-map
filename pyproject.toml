@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "future-map"
-version = "0.1.0"
+version = "0.1.1"
 description = "Simple package to enhance Python's concurrent.futures for memory efficiency"
 authors = ["Arai Hiroki <hiroara62@gmail.com>"]
 readme = "README.md"
