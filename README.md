@@ -65,6 +65,48 @@ if __name__ == '__main__':
             print('Doubled value:', value)
 ```
 
+For more complicated use case:
+
+
+```python
+import time
+from concurrent.futures import ThreadPoolExecutor
+
+from future_map import FutureMap
+
+class APIClient:
+    def __init__(self, max_connections):
+        self.__max_connections = max_connections
+        self.__executor = None
+
+    def __enter__(self):
+        self.__executor = ThreadPoolExecutor(max_workers=self.__max_connections)
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.__executor.shutdown()
+        self.__executor = None
+
+    def call(self, url):
+        time.sleep(1)
+        return "Response from {}".format(url)
+
+    def call_async(self, url):
+        if self.__executor is None:
+            raise Exception("call_async needs to be called in the runtime context with this APIClient")
+        return self.__executor.submit(self.call, url)
+
+
+def make_urls():
+    for i in range(100):
+        yield "https://example.com/api/resources/{}".format(i)
+
+if __name__ == '__main__':
+    with APIClient(max_connections=3) as api_client:
+        for response in FutureMap(api_client.call_async, make_urls(), buffersize=5):
+            print(response)
+```
+
 ### API
 
 #### `FutureMap(fn, iterable, buffersize)`
